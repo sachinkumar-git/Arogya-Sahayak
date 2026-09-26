@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 200 35% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 35% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 35% 13%;
+
+    --primary: 187 85% 24%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 185 52% 94%;
+    --primary-strong: 190 80% 16%;
+
+    --wellness: 155 75% 24%;
+    --wellness-foreground: 0 0% 100%;
+    --wellness-light: 150 50% 94%;
+
+    --accent: 22 90% 36%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 32 100% 94%;
+    --marigold: 38 95% 55%;
+
+    --success: 142 72% 25%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 60% 93%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 40 95% 92%;
+    --warning-strong: 28 90% 30%;
+
+    --emergency: 0 74% 42%;
+    --emergency-foreground: 0 0% 100%;
+    --emergency-light: 0 80% 96%;
+
+    --secondary: 190 22% 95%;
+    --secondary-foreground: 200 35% 13%;
+
+    --muted: 190 20% 94%;
+    --muted-foreground: 200 14% 37%;
+
+    --destructive: 0 74% 42%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 190 18% 88%;
+    --input: 195 14% 55%;
+    --ring: 187 85% 28%;
+
+    --radius: 0.75rem;
+
+    --shadow-xs: 0 1px 2px hsl(200 35% 13% / 0.05);
+    --shadow-sm: 0 1px 3px hsl(200 35% 13% / 0.07), 0 1px 2px -1px hsl(200 35% 13% / 0.05);
+    --shadow-md: 0 6px 16px -4px hsl(200 35% 13% / 0.1), 0 2px 4px -2px hsl(200 35% 13% / 0.06);
+    --shadow-lg: 0 18px 40px -12px hsl(190 80% 16% / 0.28), 0 4px 10px -4px hsl(200 35% 13% / 0.08);
+    --shadow-primary: 0 8px 24px -8px hsl(var(--primary) / 0.45);
+
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+    scroll-padding-bottom: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for] {
+    cursor: pointer;
+  }
+
+  main:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  .btn-large {
+    @apply min-h-14 rounded-xl px-6 py-3 text-base font-semibold;
+  }
+
+  .icon-large {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl;
+  }
+
+  .health-card {
+    @apply rounded-2xl border border-border/80 bg-card p-5 shadow-sm sm:p-6;
+  }
+
+  .emergency-btn {
+    @apply bg-emergency text-emergency-foreground shadow-md transition-[background-color,box-shadow] hover:bg-emergency/90 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  .card-link {
+    @apply transition-[box-shadow,border-color,transform] duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.08em] text-primary;
+  }
+
+  .section-title {
+    @apply font-display text-lg font-semibold tracking-tight;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(hsl(var(--primary) / 0.14) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  .bg-dots-light {
+    background-image: radial-gradient(hsl(0 0% 100% / 0.16) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  .panel-brand {
+    @apply relative isolate overflow-hidden rounded-3xl bg-primary text-primary-foreground shadow-lg;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-strong)) 100%);
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: rise 0.45s var(--ease-out) both;
+  }
+
+  .stagger > * {
+    animation: rise 0.45s var(--ease-out) both;
+  }
+  .stagger > *:nth-child(2) {
+    animation-delay: 40ms;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 80ms;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 120ms;
+  }
+  .stagger > *:nth-child(n + 5) {
+    animation-delay: 160ms;
+  }
+
+  .pb-safe {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--path-length, 600);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    @apply bg-white;
+  }
+  .health-card {
+    @apply shadow-none break-inside-avoid;
+  }
+}
